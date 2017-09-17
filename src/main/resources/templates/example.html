@@ -5,6 +5,19 @@
     <title>HELLO</title>
 </head>
 <body>
-    <h1>Hello <span th:text="${name}"></span> !</h1>
+    <table>
+        <thead>
+            <tr>
+                <th><b>NAME</b></th>
+                <th><b>AGE</b></th>
+            </tr>
+        </thead>
+        <tbody th:each="person : ${people}"> <!-- Por cada "person" en el listado "people"  -->
+            <tr>
+                <th th:text="${person.name}"></th>
+                <th th:text="${person.age}"></th>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
