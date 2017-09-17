@@ -5,7 +5,6 @@ spring:
     date-format: DD/MM/YY
     servlet:
       load-on-startup: -1
-    locale: Accept-Language
   social:
     auto-connection-views: false
   thymeleaf:
