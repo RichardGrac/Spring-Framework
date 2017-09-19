@@ -2,6 +2,7 @@ package com.udemy.backendninja.controller;
 
 import com.udemy.backendninja.component.ExampleComponent;
 import com.udemy.backendninja.model.Person;
+import com.udemy.backendninja.service.ExampleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,9 @@ public class ExampleController {
 
     public static final String EXAMPLE_VIEW = "example";
 
+    @Autowired
+    @Qualifier("exampleService")
+    private ExampleService exampleService;
 
     //Inyectamos nustro componente "ExampleComponent"
     @Autowired // índica a Spring que vamos a inyectar un componente que se encuentra en su memoria
@@ -32,7 +36,7 @@ public class ExampleController {
     public String exampleString(Model model){
         exampleComponent.sayHello();
         // Habiendo un atributo th:text"${nombre_variable}" con nombre_variable = name en ambas partes (Controller y html)
-        model.addAttribute("people", getPeople());
+        model.addAttribute("people", exampleService.getListPeople());
         return EXAMPLE_VIEW;
     }
 
@@ -41,16 +45,7 @@ public class ExampleController {
 //    @RequestMapping(value = "/exampleMAV", method = RequestMethod.GET)
     public ModelAndView exampleMAV(){
         ModelAndView mav = new ModelAndView(EXAMPLE_VIEW);
-        mav.addObject("people", getPeople());
+        mav.addObject("people", exampleService.getListPeople());
         return mav;
-    }
-
-    private List<Person> getPeople(){
-        List<Person> people = new ArrayList<>();
-        people.add(new Person("Richard",21));
-        people.add(new Person("Jorge",25));
-        people.add(new Person("Sergio",28));
-        people.add(new Person("Tommy",30));
-        return people;
     }
 }
