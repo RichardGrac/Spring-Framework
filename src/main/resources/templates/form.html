@@ -9,7 +9,9 @@
     <!-- Para utilizar un objeto del Controller, "th:object=..." -->
     <form action="#" th:action="@{/example3/addperson}" th:object="${person}" method="post">
         <p> Name: <input type="text" th:field="*{name}"/></p>
+        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name has error</p>
         <p> Age:  <input type="number" th:field="*{age}" /></p>
+        <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age has error</p>
         <button type="submit" value="Submit">Send</button>
     </form>
 </body>
