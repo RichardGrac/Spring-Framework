@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <title>Backend Ninja</title>
   <meta charset="utf-8" />
@@ -44,7 +44,8 @@
 
 <div class="jumbotron">
   <div class="container text-center">
-  <img src="../static/imgs/2.png" />
+    <!-- Hay que decirle a Spring dónde se encuentra 2.png, partiendo de "resources/static" -->
+  <img src="../../static/imgs/2.png" th:src="@{/imgs/2.png}" />
     <h1>Error...</h1>
     <p>Not every contact sends data to the user, for example the 404 request (page not found) and the requests for pages that are already loaded...</p>
   </div>

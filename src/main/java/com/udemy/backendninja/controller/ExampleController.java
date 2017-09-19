@@ -1,6 +1,9 @@
 package com.udemy.backendninja.controller;
 
+import com.udemy.backendninja.component.ExampleComponent;
 import com.udemy.backendninja.model.Person;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,10 +20,17 @@ public class ExampleController {
 
     public static final String EXAMPLE_VIEW = "example";
 
+
+    //Inyectamos nustro componente "ExampleComponent"
+    @Autowired // índica a Spring que vamos a inyectar un componente que se encuentra en su memoria
+    @Qualifier("exampleComponent") // índica a Spring el nombre del bean que está en su memoria ("ExampleComponent")
+    private ExampleComponent exampleComponent;
+
     //Primera forma: para cuando hacemos redirecciones sin datos o muy pocos datos
 //    @RequestMapping(value = "/exampleString", method = RequestMethod.GET)
     @GetMapping("/exampleString")
     public String exampleString(Model model){
+        exampleComponent.sayHello();
         // Habiendo un atributo th:text"${nombre_variable}" con nombre_variable = name en ambas partes (Controller y html)
         model.addAttribute("people", getPeople());
         return EXAMPLE_VIEW;
