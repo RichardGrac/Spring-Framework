@@ -8,7 +8,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Component
+@Component("requestTimeInterceptor")
 public class RequestTimeInterceptor extends HandlerInterceptorAdapter {
 
     public static final Log LOG = LogFactory.getLog(RequestTimeInterceptor.class);
