@@ -1,9 +1,9 @@
 package com.udemy.backendninja.entity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "course")
 public class Course {
 
     @Id
@@ -73,5 +73,16 @@ public class Course {
 
     public void setHours(int hours) {
         this.hours = hours;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", hours=" + hours +
+                '}';
     }
 }
