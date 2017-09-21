@@ -20,10 +20,12 @@
             <th><span th:text="${course.description}"></span></th>
             <th><span th:text="${course.price}"></span></th>
             <th><span th:text="${course.hours}"></span></th>
+            <th><button>Delete</button></th>
         </tr>
         </tbody>
     </table>
-
+    </br>
+    </hr>
     <!-- Para utilizar el object "course" debemos de crearlo primero en el Controller -->
     <form action="#" th:action="@{/courses/addcourse}" th:object="${course}" method="post">
         <p>Name: <input type="text" th:field="*{name}"/></p>
