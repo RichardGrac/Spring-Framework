@@ -11,4 +11,5 @@ public interface CourseService {
     public abstract Course addCourse(CourseModel courseModel);
     public abstract int removeCourse(int id);
     public abstract Course updateCourse(CourseModel courseModel);
+    public abstract CourseModel getCourse(int id);
 }

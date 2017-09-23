@@ -8,10 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /* Hay que intentar que los Controller no utilicen Entitys, sino Models. */
@@ -40,21 +37,27 @@ public class CourseController {
     // Añadimos un curso y finaliza regresandonos el metodo de Todos los cursos
     @PostMapping("/addcourse")
     public String addCourse(@ModelAttribute("course") CourseModel courseModel){
+        if (courseModel.getId() == 0){
+            courseService.addCourse(courseModel);
+        }else{
+            courseService.updateCourse(courseModel);
+        }
         LOG.info("Call: " + "addCourse()" + "--PARAM: " + courseModel.toString());
-        courseService.addCourse(courseModel);
         return "redirect:/courses/listcourses";
     }
 
-    @PostMapping("/removecourse")
-    public String removeCourse(int id){
+    @GetMapping("/removecourse")
+    public String removeCourse(@RequestParam(name = "id", required = true) int id){
         LOG.info("Call: removeCourse() --PARAM:" + id);
         courseService.removeCourse(id);
         return "redirect:/courses/listcourses";
     }
 
-    @PostMapping("updateCourse")
-    public String updateCourse(@ModelAttribute("course") CourseModel courseModel){
-        courseService.updateCourse(courseModel);
-        return "redirect:/courses/listcourses";
+    @GetMapping("/updatecourse")
+    public ModelAndView updateCourse(@RequestParam(name = "id", required = true) int id){
+        ModelAndView mav = new ModelAndView(COURSE_VIEW);
+        CourseModel courseModel = courseService.getCourse(id);
+        mav.addObject("course", courseModel);
+        return mav;
     }
 }

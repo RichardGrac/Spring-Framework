@@ -55,6 +55,15 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course updateCourse(CourseModel courseModel) {
         // Como "course" ya va a tener un id, por lo que al intentar guardalo en la BD solo se actualizará
+        System.out.println("Update: " + courseModel.getId());
         return courseJpaRepository.save(courseConverter.model2Entity(courseModel));
     }
+
+    @Override
+    public CourseModel getCourse(int id) {
+        Course course = courseJpaRepository.findById(id);
+        return courseConverter.entity2Model(course);
+    }
+
+
 }
